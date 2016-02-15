@@ -128,7 +128,7 @@
 *     ..
 *     .. Local Scalars ..
       LOGICAL            UPPER
-      INTEGER            J, JB, NB
+      INTEGER            I, J, JB, NB
 *     ..
 *     .. External Functions ..
       LOGICAL            LSAME
@@ -136,7 +136,7 @@
       EXTERNAL           LSAME, ILAENV
 *     ..
 *     .. External Subroutines ..
-      EXTERNAL           DGEMM, DPOTRF2, DSYRK, DTRSM, XERBLA
+      EXTERNAL           DGEMM, DPOTRF2, DSYRK, DTRSM, XERBLA, GENERATE_CHECKSUM
 *     ..
 *     .. Intrinsic Functions ..
       INTRINSIC          MAX, MIN
@@ -173,6 +173,20 @@
 *
          CALL DPOTRF2( UPLO, N, A, LDA, INFO )
       ELSE
+
+
+*        Initialize checksum vector
+         real, dimension (:,:), allocatable :: checksum_vector
+         allocate ( checksum_vector(2, NB) )
+         do I = 1, NB
+            checksum_vector(1,I) = 1.0
+            print*, "checksum_vector(",1,",",I,") = ", checksum_vector(1,I)
+         end do
+
+         do I = 1, NB
+            checksum_vector(2,I) = I
+            print*, "checksum_vector(",2,",",I,") = ", checksum_vector(2,I)
+         end do
 *
 *        Use blocked code.
 *
