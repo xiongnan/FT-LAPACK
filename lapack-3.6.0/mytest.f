@@ -1,3 +1,3 @@
-program hello
-    Print *, "Hello World!"
-end program Hello
+       program hello
+            Print *, "Hello World!"
+       end program Hello
