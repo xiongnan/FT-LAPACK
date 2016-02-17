@@ -176,7 +176,7 @@
 
 
 *        Initialize checksum vector
-        real a
+        real cjy
 
 *         real, dimension (:,:), allocatable :: checksum_vector
 *         allocate ( checksum_vector(2, NB) )
