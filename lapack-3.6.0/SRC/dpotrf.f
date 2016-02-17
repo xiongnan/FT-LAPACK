@@ -143,6 +143,11 @@
 *     ..
 *     .. Executable Statements ..
 *
+
+
+      real cjy
+
+
 *     Test the input parameters.
 *
       INFO = 0
@@ -176,7 +181,7 @@
 
 
 *        Initialize checksum vector
-        real cjy
+
 
 *         real, dimension (:,:), allocatable :: checksum_vector
 *         allocate ( checksum_vector(2, NB) )
