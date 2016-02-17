@@ -25,7 +25,7 @@
          end do
       end do
       
-      do i=1,m
+      do i=1, N
          Print *, ( lower(i,j), j=1,N )
       end do
 
