@@ -24,17 +24,16 @@
             upper(j, i) = temp   
          end do
       end do
-      
+      Print *, "Lower:"
       do i=1, N
          Print 100, ( lower(i,j), j=1,N )
       end do
-
-      do i = 1, N
-         do j = 1, N
-!            write(*, advance='no') lower(i, j), "  "
-          end do
-!         Print *, "\n"
+      
+      Print *, "Upper"
+      do i=1, N
+         Print 100, ( upper(i,j), j=1,N )
       end do
+
  100  format (1x, 16(1x,f5.1))
       Print *, "Hello World!"
       end program Hello
