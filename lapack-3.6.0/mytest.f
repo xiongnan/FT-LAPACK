@@ -35,6 +35,6 @@
           end do
 !         Print *, "\n"
       end do
-
+ 100   format (1x, N(1x,f5.1)
       Print *, "Hello World!"
       end program Hello
