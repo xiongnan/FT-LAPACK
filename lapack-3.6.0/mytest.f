@@ -26,7 +26,7 @@
       end do
       
       do i=1, N
-         Print *, ( lower(i,j), j=1,N )
+         Print 100, ( lower(i,j), j=1,N )
       end do
 
       do i = 1, N
@@ -35,6 +35,6 @@
           end do
 !         Print *, "\n"
       end do
- 100   format (1x, 16(1x,f5.1)
+ 100  format (1x, 16(1x,f5.1))
       Print *, "Hello World!"
       end program Hello
