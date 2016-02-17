@@ -21,13 +21,13 @@
                temp = 0.0;
             end if
             lower(i, j) = temp
-            upper(j, i) = temp
+            upper(j, i) = temp   
          end do
       end do
 
       do i = 1, N
          do j = 1, N
-            Print *, lower(i, j), "  "
+            write(*, advance='no') lower(i, j), "  "
          end do
          Print *, "\n"
       end do

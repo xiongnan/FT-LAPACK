@@ -27,7 +27,8 @@
 
       do i = 1, N
          do j = 1, N
-            write(*, advance='no') lower(i, j), "  "
+!            write(*, advance='no') lower(i, j), "  "
+            write(*,"(A)",advance="no") lower(i, j)
          end do
          Print *, "\n"
       end do
