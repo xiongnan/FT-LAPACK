@@ -24,6 +24,10 @@
             upper(j, i) = temp   
          end do
       end do
+      
+      do i=1,m
+         write(*,"100g15.5") ( lower(i,j), j=1,N )
+      end do
 
       do i = 1, N
          do j = 1, N
