@@ -26,14 +26,13 @@
       end do
       
       do i=1,m
-         write(*,"100g15.5") ( lower(i,j), j=1,N )
+         Print *, ( lower(i,j), j=1,N )
       end do
 
       do i = 1, N
          do j = 1, N
 !            write(*, advance='no') lower(i, j), "  "
-            write(*,"(A)",advance="no") lower(i, j)
-         end do
+          end do
          Print *, "\n"
       end do
 
