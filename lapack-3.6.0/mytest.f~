@@ -24,11 +24,15 @@
             upper(j, i) = temp   
          end do
       end do
+      
+      do i=1, N
+         Print *, ( lower(i,j), j=1,N )
+      end do
 
       do i = 1, N
          do j = 1, N
-            write(*, advance='no') lower(i, j), "  "
-         end do
+!            write(*, advance='no') lower(i, j), "  "
+          end do
          Print *, "\n"
       end do
 
