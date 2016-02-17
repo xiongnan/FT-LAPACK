@@ -4,7 +4,7 @@
       real, dimension (:,:), allocatable :: lower
       integer :: N
       integer :: i, j
-      integer :: temp
+      real :: temp
       
       external DPOTRF
       
@@ -17,16 +17,20 @@
          do j = 1, N
             if (j <= i) then
                temp = rand()
-               lower(i, j) = temp
-               upper(j, i) = temp
             else
-               
-lower(i, j) = temp
-               upper(j, i) = temp
+               temp = 0.0;
+            end if
+            lower(i, j) = temp
+            upper(j, i) = temp
          end do
       end do
 
-
+      do i = 1, N
+         do j = 1, N
+            Print *, lower(i, j), "  "
+         end do
+         Print *, "\n"
+      end do
 
       Print *, "Hello World!"
       end program Hello
