@@ -16,7 +16,7 @@
       do i = 1, N
          do j = 1, N
             if (j <= i) then
-               temp = rand()
+               temp = irand()
             else
                temp = 0.0;
             end if
@@ -33,7 +33,7 @@
          do j = 1, N
 !            write(*, advance='no') lower(i, j), "  "
           end do
-         Print *, "\n"
+!         Print *, "\n"
       end do
 
       Print *, "Hello World!"

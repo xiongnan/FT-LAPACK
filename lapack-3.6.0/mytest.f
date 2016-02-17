@@ -16,7 +16,7 @@
       do i = 1, N
          do j = 1, N
             if (j <= i) then
-               temp = irand()
+               temp = int(rand() * 10)
             else
                temp = 0.0;
             end if
