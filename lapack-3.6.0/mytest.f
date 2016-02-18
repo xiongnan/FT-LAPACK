@@ -36,7 +36,7 @@
       end do
 
       call DGEMM('N', 'N', N, N, N, 1.0, lower, N, upper, N, 0.0, matrix
-    + , N)
+     +, N)
       Print *, "Matrix"
       do i=1, N
          Print 100, ( matrix(i,j), j=1,N )
