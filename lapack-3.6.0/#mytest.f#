@@ -39,8 +39,7 @@
 
       call DGEMM('N', 'N', N, N, N, one, lower, N, upper, N, zero,
      +matrix, N)
-
-      Print *, "Matrix"
+ Print *, "Matrix"
       do i=1, N
          Print 100, ( matrix(i,j), j=1,N )
       end do
