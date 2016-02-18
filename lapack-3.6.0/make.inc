@@ -75,7 +75,7 @@ XBLASLIB     =
 #  possible.)
 #
 BLASLIB      = ../../libacml.a
-CBLASLIB     = ../../libcblas.a
+CBLASLIB     = ../../libacml.a
 LAPACKLIB    = liblapack.a
 TMGLIB       = libtmglib.a
 LAPACKELIB   = liblapacke.a
