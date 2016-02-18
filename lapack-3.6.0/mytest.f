@@ -41,9 +41,9 @@
      +matrix, N)
 
       Print *, "Matrix"
-      do i=1, N
-         Print 100, ( matrix(i,j), j=1,N )
-      end do
+c      do i=1, N
+c         Print 100, ( matrix(i,j), j=1,N )
+c      end do
       
  100  format (1x, 16(1x,f5.1))
       Print *, "Hello World!"
