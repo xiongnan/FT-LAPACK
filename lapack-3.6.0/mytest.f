@@ -6,11 +6,13 @@
       integer :: N
       integer :: i, j
       real :: temp
-      
+      real :: one, zero
       external DGEMM, DPOTRF
       
       N = 16
-      
+      one = 1.0
+      zero = 0.0
+
       allocate ( upper(N, N) )
       allocate ( lower(N, N) )
       allocate ( matrix(N, N))
@@ -35,8 +37,8 @@
          Print 100, ( upper(i,j), j=1,N )
       end do
 
-c      call DGEMM('N', 'N', N, N, N, 1.0, lower, N, upper, N, 0.0, matrix
-c     +, N)
+      call DGEMM('N', 'N', N, N, N, one, lower, N, upper, N, zero,
+     +matrix, N)
       Print *, "Matrix"
       do i=1, N
          Print 100, ( matrix(i,j), j=1,N )
