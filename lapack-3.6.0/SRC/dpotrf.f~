@@ -129,6 +129,10 @@
 *     .. Local Scalars ..
       LOGICAL            UPPER
       INTEGER            I, J, JB, NB
+*     ..                                                                                  
+*     .. External Functions ..                                                            
+      DOUBLE PRECISION   CHKV(N, N)
+      DOUBLE PRECISION   CHKM(N, N)
 *     ..
 *     .. External Functions ..
       LOGICAL            LSAME
