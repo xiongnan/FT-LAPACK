@@ -123,16 +123,18 @@
 *  =====================================================================
 *
 *     .. Parameters ..
-      DOUBLE PRECISION   ONE
-      PARAMETER          ( ONE = 1.0D+0 )
+      DOUBLE PRECISION   ONE, ZERO
+      PARAMETER          ( ONE = 1.0D+0, ZERO = 0.0D+0 )
 *     ..
 *     .. Local Scalars ..
       LOGICAL            UPPER
       INTEGER            I, J, JB, NB
 *     ..
-*     .. External Functions ..        
-      DOUBLE PRECISION   CHKV(N, N)
-      DOUBLE PRECISION   CHKM(N, N)
+*     .. Checksums Related ..
+      INTEGER            NCHK, NM, LDV, LDM
+      PARAMETER          (NCHK=2, NM=16,LDV=2,LDM=16)
+      DOUBLE PRECISION   CHKV(NCHK, 4)
+      DOUBLE PRECISION   CHKM(NM, NM)
 *     ..
 *     .. External Functions ..
       LOGICAL            LSAME
@@ -147,10 +149,6 @@
 *     ..
 *     .. Executable Statements ..
 *
-
-
-      real cjy
-
 
 *     Test the input parameters.
 *
@@ -176,6 +174,7 @@
 *     Determine the block size for this environment.
 *
       NB = ILAENV( 1, 'DPOTRF', UPLO, N, -1, -1, -1 )
+      NB = 2
       IF( NB.LE.1 .OR. NB.GE.N ) THEN
 *
 *        Use unblocked code.
@@ -229,6 +228,13 @@
    10       CONTINUE
 *
          ELSE
+*           Encode checksums
+            DO 100 J = 1, N, NB
+               CALL DGEMM ('No transpose', 'No transpose', NCHK, N, NB, 
+     $                     ONE, CHKV(1, 1), LDV, A(J, 1), LDA, ZERO, 
+     $                     CHKM(J/NB*2), LDM)
+ 100        CONTINUE
+            
 *
 *           Compute the Cholesky factorization A = L*L**T.
 *
