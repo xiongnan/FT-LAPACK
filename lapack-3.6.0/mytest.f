@@ -1,21 +1,21 @@
       program hello
-      
-      real, dimension (:,:), allocatable :: upper
-      real, dimension (:,:), allocatable :: lower
-      real, dimension (:,:), allocatable :: matrix
-      integer :: N
+
+      integer,parameter :: N = 8      
+      real :: upper (N, N)
+      real :: lower (N, N)
+      real :: matrix (N, N)
+
       integer :: i, j
       real :: temp
       real :: one, zero
       external DGEMM, DPOTRF
       
-      N = 16
       one = 1.0
       zero = 0.0
 
-      allocate ( upper(N, N) )
-      allocate ( lower(N, N) )
-      allocate ( matrix(N, N))
+      !allocate ( upper(N, N) )
+      !allocate ( lower(N, N) )
+      !allocate ( matrix(N, N))
       do i = 1, N
          do j = 1, N
             if (j <= i) then
