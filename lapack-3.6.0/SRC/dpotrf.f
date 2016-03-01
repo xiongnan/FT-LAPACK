@@ -142,6 +142,7 @@
       EXTERNAL           LSAME, ILAENV
 *     ..
 *     .. External Subroutines ..
+      EXTERNAL           DGEMM, POTRF2, DSYRK, DTRSM,
       EXTERNAL           DGEMMFT, DPOTRF2FT, DSYRKFT, DTRSMFT, XERBLA
 *     ..
 *     .. Intrinsic Functions ..
