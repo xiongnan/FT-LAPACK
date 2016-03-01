@@ -1,13 +1,13 @@
       program hello
 
       integer,parameter :: N = 8      
-      real :: upper (N, N)
-      real :: lower (N, N)
-      real :: matrix (N, N)
+      double precision :: upper (N, N)
+      double precision :: lower (N, N)
+      double precision :: matrix (N, N)
 
-      integer :: i, j
-      real :: temp
-      real :: one, zero
+      integer :: i, j, info
+      double precision :: temp
+      double precision :: one, zero
       external DGEMM, DPOTRF
       
       one = 1.0
@@ -41,10 +41,15 @@
      +matrix, N)
 
       Print *, "Matrix"
-c      do i=1, N
-c         Print 100, ( matrix(i,j), j=1,N )
-c      end do
-      
+      do i=1, N
+         Print 100, ( matrix(i,j), j=1,N )
+      end do
+
+
+      CALL DPOTRF('L', N, matrix, 16, info)
+
+
+
  100  format (1x, 16(1x,f5.1))
       Print *, "Hello World!"
       end program Hello
