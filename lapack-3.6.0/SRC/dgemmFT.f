@@ -185,7 +185,7 @@
 *> \endverbatim
 *>
 *  =====================================================================
-      SUBROUTINE DGEMMFT(TRANSA,TRANSB,M,N,K,ALPHA,A,LDA,B,LDB,BETA,C,
+      SUBROUTINE DGFT(TRANSA,TRANSB,M,N,K,ALPHA,A,LDA,B,LDB,BETA,C,
      &                   LDC, CHKA,LDCA,CHKC,LDCC,CHKV,LDCV)
 *
 *  -- Reference BLAS level3 routine (version 3.6.0) --
