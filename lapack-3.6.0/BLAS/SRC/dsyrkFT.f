@@ -177,7 +177,7 @@
 *
 *     .. Scalar Arguments ..
       DOUBLE PRECISION ALPHA,BETA,ZERO
-      INTEGER K,LDA,LDC,N, LDCA,LDCC,LDAR,LDCR,LDCV
+      INTEGER K,LDA,LDC,N, LDCA,LDCC,LDAR,LDCR,LDCV,I,J
       CHARACTER TRANS,UPLO
 *     ..
 *     .. Array Arguments ..
@@ -205,6 +205,21 @@
       CALL DGEMM('No transpose', 'Transpose', 2, N, K, ALPHA, CHKA, 
      &           LDCA, A, LDA, BETA, C, LDC)
 
+
+      PRINT *, "SYRK UPDATED MATRIX"
+      
+      DO I=1, N
+         Print 100, ( A(I,J), J=1,N )
+      end do
+
+      PRINT *, "SYRK UPDATED CHKSUM"
+      DO I=1, 2
+         Print 100, ( CHKA(I,J), J=1,N )
+      end do
+
+      
+
+ 100  format (1x, 16(1x,f5.1))
       RETURN
 *
 *     End of DSYRKFT .

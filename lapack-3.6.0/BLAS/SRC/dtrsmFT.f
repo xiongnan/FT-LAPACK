@@ -200,21 +200,38 @@
 
 
 *  =====================================================================
-*
+*     ..Local Scalars ..
+      INTEGER J
+
       ZERO=0.0D+0
 
       CALL DGEMM('No transpose','No transpose',2,N,N,ALPHA,CHKV,LDCV,
      &           A,LDA,ZERO,CHKAR,LDAR)
       
       DO 10 J=1, M, N
-      CALL DGEMM('No transpose','No transpose',2,N,N,ALPHA,CHKV,LDCV,
-     &           B(J,1),LDB,ZERO,CHKBR(J/N*2),LDBR)
+         CALL DGEMM('No transpose','No transpose',2,N,N,ALPHA,CHKV,LDCV,
+     &               B(J,1),LDB,ZERO,CHKBR((J/N)*2,1),LDBR)
 
  10   CONTINUE
 
       CALL DTRSM(SIDE, UPLO, TRANSA,DIAG,M,N,ALPHA,A,LDA,B,LDB)
 *
       CALL DTRSM(SIDE, UPLO,TRANSA,DIAG,(M/N)*2,N,ALPHA,A,LDA,CHKB,LDCB)
+      
+      PRINT *, "TRSMK UPDATED MATRIX"
+
+      DO I=1, M
+         Print 100, ( B(I,J), J=1,N )
+      end do
+
+      PRINT *, "SYRK UPDATED CHKSUM"
+      DO I=1, (M/N)/2
+         Print 100, ( CHKB(I,J), J=1,N )
+      end do
+      
+ 100  format (1x, 16(1x,f5.1))
+
+
       RETURN
 *
 *     End of DTRSMFT .

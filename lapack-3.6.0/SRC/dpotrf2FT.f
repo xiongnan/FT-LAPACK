@@ -139,6 +139,19 @@
          CHKA(J+1:N)=CHKA(J+1:N)-CHKA(J)*A(J+1:N,J)
       END DO
 
+      PRINT *, "POTRF2 UPDATED MATRIX"
+
+      DO I=1, N
+         Print 100, ( A(I,J), J=1,N )
+      end do
+
+      PRINT *, "POTRF2 UPDATED CHKSUM"
+      DO I=1, 2
+         Print 100, ( CHKA(I,J), J=1,N )
+      end do
+      
+ 100  format (1x, 16(1x,f5.1))
+
       RETURN
 
 *     End of DPOTRF2FT .

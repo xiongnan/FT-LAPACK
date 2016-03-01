@@ -142,7 +142,7 @@
       EXTERNAL           LSAME, ILAENV
 *     ..
 *     .. External Subroutines ..
-      EXTERNAL           DGEMM, DPOTRF2, DSYRK, DTRSM, XERBLA, GENERATE_CHECKSUM
+      EXTERNAL           DGEMMFT, DPOTRF2FT, DSYRKFT, DTRSMFT, XERBLA
 *     ..
 *     .. Intrinsic Functions ..
       INTRINSIC          MAX, MIN
@@ -244,21 +244,35 @@
 *              for non-positive-definiteness.
 *
                JB = MIN( NB, N-J+1 )
-               CALL DSYRK( 'Lower', 'No transpose', JB, J-1, -ONE,
-     $                     A( J, 1 ), LDA, ONE, A( J, J ), LDA )
-               CALL DPOTRF2( 'Lower', JB, A( J, J ), LDA, INFO )
+
+
+               CALL DSYRKFT( 'Lower', 'No transpose', JB, J-1, -ONE,
+     $                     A( J, 1 ), LDA, ONE, A( J, J ), LDA,
+     $                     CHKM((J/NB)*2+1,1), LDM, CHKM((J/NB)*2+1, J),
+     $                     LDM, CHKV, LDV)
+
+
+               CALL DPOTRF2FT( 'Lower', JB, A( J, J ), LDA, INFO,
+     $                        CHKM((J/NB)*2+1, J), LDM, CHKV, LDV)
+
+
                IF( INFO.NE.0 )
      $            GO TO 30
                IF( J+JB.LE.N ) THEN
 *
 *                 Compute the current block column.
 *
-                  CALL DGEMM( 'No transpose', 'Transpose', N-J-JB+1, JB,
+                  CALL DGEMMFT( 'No transpose', 'Transpose', N-J-JB+1, JB,
      $                        J-1, -ONE, A( J+JB, 1 ), LDA, A( J, 1 ),
-     $                        LDA, ONE, A( J+JB, J ), LDA )
-                  CALL DTRSM( 'Right', 'Lower', 'Transpose', 'Non-unit',
+     $                        LDA, ONE, A( J+JB, J ), LDA,
+     $                        CHKM((J/NB)*2+3, 1), LDM, CHKM((J/NB)*2+3, J), LDM,
+     $                        CHKV, LDV)
+
+
+                  CALL DTRSMFT( 'Right', 'Lower', 'Transpose', 'Non-unit',
      $                        N-J-JB+1, JB, ONE, A( J, J ), LDA,
-     $                        A( J+JB, J ), LDA )
+     $                        A( J+JB, J ), LDA,  CHKM((J/NB)*2+3, J), LDM,
+     $                        CHKV, LDV)
                END IF
    20       CONTINUE
          END IF

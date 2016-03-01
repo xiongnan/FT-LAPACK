@@ -236,6 +236,20 @@
       CALL DGEMM(TRANSA,TRANSB,(M/N)*2,N,K,ALPHA,CHKA,LDCA,B,LDB,
      &            BETA,CHKC,LDCC )
 
+      PRINT *, "GEMM UPDATED MATRIX"
+
+      DO I=1, M
+         Print 100, ( C(I,J), J=1,N )
+      end do
+
+      PRINT *, "GEMM UPDATED CHKSUM"
+      DO I=1, (M/N)*2
+         Print 100, ( CHKC(I,J), J=1,N )
+      end do
+      
+ 100  format (1x, 16(1x,f5.1))
+
+
       RETURN
 *
 *     End of DGEMMFT .
