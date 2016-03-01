@@ -104,7 +104,7 @@
 *> \ingroup doublePOcomputational
 *
 *  =====================================================================
-      RECURSIVE SUBROUTINE DPOTRF2FT( UPLO, N, A, LDA, INFO )
+      SUBROUTINE DPOTRF2FT( UPLO, N, A, LDA, INFO,CHKA,LDCA,CHKV,LDCV )
 *
 *  -- LAPACK computational routine (version 3.6.0) --
 *  -- LAPACK is a software package provided by Univ. of Tennessee,    --
@@ -113,19 +113,45 @@
 *
 *     .. Scalar Arguments ..
       CHARACTER          UPLO
-      INTEGER            INFO, LDA, N
+      INTEGER            INFO, LDA, N,LDCA,LDCV,LDAR
+      DOUBLE PRECISION   ZERO, ALPHA
 *     ..
 *     .. Array Arguments ..
-      DOUBLE PRECISION   A( LDA, * )
+      DOUBLE PRECISION   A( LDA, * ),CHKA(LDCA,*),CHKV(2,16),
+     &                   CHKAR(16,16)
 *     ..
-      EXTERNAL DPOTRF2
+      EXTERNAL DPOTRF2, DGEMM
 
-
+      INTEGER           J
 
 *  =====================================================================
 *
+      ZERO=0.0D+0
+      ALPHA=-1.0D+0
+      LDCR=16
+
+      CALL DGEMM('No transpose','No transpose',2,N,N,ALPHA,CHKV,LDCV,
+     &            A,LDA,ZERO,CHKAR,LDAR)
+
       CALL DPOTRF2( UPLO, N, A, LDA, INFO)
+      DO J=1, N
+         CHKA(J)=CHKA(J)/A(J,J)
+         CHKA(J+1:N)=CHKA(J+1:N)-CHKA(J)*A(J+1:N,J)
+      END DO
+
+      PRINT *, "POTRF2 UPDATED MATRIX"
+
+      DO I=1, N
+         Print 100, ( A(I,J), J=1,N )
+      end do
+
+      PRINT *, "POTRF2 UPDATED CHKSUM"
+      DO I=1, 2
+         Print 100, ( CHKA(I,J), J=1,N )
+      end do
       
+ 100  format (1x, 16(1x,f5.1))
+
       RETURN
 
 *     End of DPOTRF2FT .

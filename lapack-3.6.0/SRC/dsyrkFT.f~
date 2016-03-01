@@ -181,7 +181,7 @@
       CHARACTER TRANS,UPLO
 *     ..
 *     .. Array Arguments ..
-      DOUBLE PRECISION A(LDA,*),C(LDC,*),CHKA(LDCA,*),CHKC(LDCC,*),
+      DOUBLE PRECISION A(LDA,*),C(LDC,*),CHKA(LDCA,*),CHKC(LDCC,*)
      &                 CHKAR(16,16),CHKCR(16,16),CHKV(2,16)
 *     ..
       EXTERNAL DSYRK,DGEMM

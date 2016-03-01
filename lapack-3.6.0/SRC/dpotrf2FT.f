@@ -135,8 +135,11 @@
 
       CALL DPOTRF2( UPLO, N, A, LDA, INFO)
       DO J=1, N
-         CHKA(J)=CHKA(J)/A(J,J)
-         CHKA(J+1:N)=CHKA(J+1:N)-CHKA(J)*A(J+1:N,J)
+         CHKA(1,J)=CHKA(1,J)/A(J,J)
+         CHKA(2,J)=CHKA(2,J)/A(J,J)
+         CHKA(1,J+1:N)=CHKA(1,J+1:N)-CHKA(1,J)*A(J+1:N,J)
+         CHKA(2,J+1:N)=CHKA(2,J+1:N)-CHKA(2,J)*A(J+1:N,J)
+
       END DO
 
       PRINT *, "POTRF2 UPDATED MATRIX"

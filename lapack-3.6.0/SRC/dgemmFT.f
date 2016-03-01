@@ -226,7 +226,7 @@
 
       DO 20 J=1, M, N
          CALL DGEMM('No transpose','No transpose',2,N,N,BETA,CHKV,LDCV,
-     &              C(J,1),LDC,ZERO,CHKCR((J/N)*2),1),LDCR)
+     &              C(J,1),LDC,ZERO,CHKCR((J/N)*2,1),LDCR)
  20   CONTINUE   
 
 
