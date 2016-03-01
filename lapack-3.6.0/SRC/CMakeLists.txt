@@ -283,7 +283,7 @@ set(DLASRC
    dormr3.f dormrq.f dormrz.f dormtr.f dpbcon.f dpbequ.f dpbrfs.f 
    dpbstf.f dpbsv.f  dpbsvx.f 
    dpbtf2.f dpbtrf.f dpbtrs.f dpocon.f dpoequ.f dporfs.f dposv.f  
-   dposvx.f dpotf2.f dpotrf.f dpotrf2.f dpotri.f dpotrs.f dpstrf.f dpstf2.f 
+   dposvx.f dpotf2.f dpotrf.f dpotrf2.f dpotrf2FT.f dpotri.f dpotrs.f dpstrf.f dpstf2.f 
    dppcon.f dppequ.f 
    dpprfs.f dppsv.f  dppsvx.f dpptrf.f dpptri.f dpptrs.f dptcon.f 
    dpteqr.f dptrfs.f dptsv.f  dptsvx.f dpttrs.f dptts2.f drscl.f  
