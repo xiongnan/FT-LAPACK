@@ -275,7 +275,7 @@
 *
                   IF (J .GT. 1) THEN
                      print *, "gemm"
-                     CALL DGEMMFT( 'No transpose', 'Transpose', N-J-JB+1,
+                     CALL DGEMMFT( 'No transpose', 'Transpose',N-J-JB+1,
      $                        JB, J-1, -ONE, A(J+JB,1), LDA, A( J, 1 ),
      $                        LDA, ONE, A( J+JB, J ), LDA,
      $                        CHKM((J/NB)*2+3, 1),LDM,
