@@ -249,7 +249,7 @@
 *              for non-positive-definiteness.
 *
                JB = MIN( NB, N-J+1 )
-               print *, "J=",J
+               print *, J
                CALL DSYRK( 'Lower', 'No transpose', JB, J-1, -ONE,
      $                     A( J, 1 ), LDA, ONE, A( J, J ), LDA)
 
