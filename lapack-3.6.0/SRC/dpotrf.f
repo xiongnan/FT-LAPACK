@@ -237,7 +237,7 @@
             DO 100 J = 1, N, NB
                CALL DGEMM ('No transpose', 'No transpose', NCHK, N, NB, 
      $                     ONE, CHKV(1, 1), LDV, A(J, 1), LDA, ZERO, 
-     $                     CHKM((J/NB)*2+1, LDM))
+     $                     CHKM((J/NB)*2+1, 1),LDM)
  100        CONTINUE
             print *, "done encode chksum"
 *
