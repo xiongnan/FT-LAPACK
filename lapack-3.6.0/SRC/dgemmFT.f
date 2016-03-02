@@ -185,7 +185,7 @@
 *> \endverbatim
 *>
 *  =====================================================================
-      SUBROUTINE DGFT(TRANSA,TRANSB,M,N,K,ALPHA,A,LDA,B,LDB,BETA,C,
+      SUBROUTINE DGEMMFT(TRANSA,TRANSB,M,N,K,ALPHA,A,LDA,B,LDB,BETA,C,
      &                   LDC, CHKA,LDCA,CHKC,LDCC,CHKV,LDCV)
 *
 *  -- Reference BLAS level3 routine (version 3.6.0) --
@@ -221,12 +221,12 @@
       
       DO 10 J=1, M, N
          CALL DGEMM('No transpose','No transpose',2,K,N,BETA,CHKV,LDCV,
-     &              A(J,1),LDA,ZERO,CHKAR((J/N)*2,1),LDAR)
+     &              A(J,1),LDA,ZERO,CHKAR((J/N)*2+1,1),LDAR)
  10   CONTINUE
 
       DO 20 J=1, M, N
          CALL DGEMM('No transpose','No transpose',2,N,N,BETA,CHKV,LDCV,
-     &              C(J,1),LDC,ZERO,CHKCR((J/N)*2,1),LDCR)
+     &              C(J,1),LDC,ZERO,CHKCR((J/N)*2+1,1),LDCR)
  20   CONTINUE   
 
 

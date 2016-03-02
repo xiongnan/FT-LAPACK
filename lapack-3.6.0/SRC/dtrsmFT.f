@@ -210,7 +210,7 @@
       
       DO 10 J=1, M, N
          CALL DGEMM('No transpose','No transpose',2,N,N,ALPHA,CHKV,LDCV,
-     &               B(J,1),LDB,ZERO,CHKBR((J/N)*2,1),LDBR)
+     &               B(J,1),LDB,ZERO,CHKBR((J/N)*2+1,1),LDBR)
 
  10   CONTINUE
 

@@ -143,7 +143,7 @@
 *     ..
 *     .. External Subroutines ..
       EXTERNAL           DGEMM, POTRF2, DSYRK, DTRSM
-      EXTERNAL           DGFT, DPOTRF2FT, DSYRKFT, DTRSMFT, XERBLA
+      EXTERNAL           DGEMMFT, DPOTRF2FT, DSYRKFT, DTRSMFT, XERBLA
 *     ..
 *     .. Intrinsic Functions ..
       INTRINSIC          MAX, MIN
@@ -267,7 +267,7 @@
 *
 *                 Compute the current block column.
 *
-                  CALL DGFT( 'No transpose', 'Transpose', N-J-JB+1,
+                  CALL DGEMMFT( 'No transpose', 'Transpose', N-J-JB+1,
      $                        JB, J-1, -ONE, A(J+JB,1), LDA, A( J, 1 ),
      $                        LDA, ONE, A( J+JB, J ), LDA,
      $                        CHKM((J/NB)*2+3, 1),LDM,
