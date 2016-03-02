@@ -249,12 +249,14 @@
 *              for non-positive-definiteness.
 *
                JB = MIN( NB, N-J+1 )
+               
+               CALL DSYRK( 'Lower', 'No transpose', JB, J-1, -ONE,
+     $                     A( J, 1 ), LDA, ONE, A( J, J ), LDA)
 
-
-               CALL DSYRKFT( 'Lower', 'No transpose', JB, J-1, -ONE,
-     $                     A( J, 1 ), LDA, ONE, A( J, J ), LDA,
-     $                     CHKM((J/NB)*2+1,1), LDM, CHKM((J/NB)*2+1, J),
-     $                     LDM, CHKV, LDV)
+*               CALL DSYRKFT( 'Lower', 'No transpose', JB, J-1, -ONE,
+*     $                     A( J, 1 ), LDA, ONE, A( J, J ), LDA,
+*     $                     CHKM((J/NB)*2+1,1), LDM, CHKM((J/NB)*2+1, J),
+*     $                     LDM, CHKV, LDV)
 
 
                CALL DPOTRF2FT( 'Lower', JB, A( J, J ), LDA, INFO,
