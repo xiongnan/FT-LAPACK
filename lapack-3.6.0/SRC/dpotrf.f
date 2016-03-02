@@ -251,6 +251,7 @@
                JB = MIN( NB, N-J+1 )
                print *, J
                IF (J .GT. 1) THEN
+                  print *, "syrk"
                   CALL DSYRK( 'Lower', 'No transpose', JB, J-1, -ONE,
      $                       A( J, 1 ), LDA, ONE, A( J, J ), LDA)
                END IF
@@ -260,7 +261,7 @@
 *     $                     CHKM((J/NB)*2+1,1), LDM, CHKM((J/NB)*2+1, J),
 *     $                     LDM, CHKV, LDV)
 
-
+               print *, "potrf2"
                CALL DPOTRF2FT( 'Lower', JB, A( J, J ), LDA, INFO,
      $                        CHKM((J/NB)*2+1, J), LDM, CHKV, LDV)
 
@@ -272,6 +273,7 @@
 *                 Compute the current block column.
 *
                   IF (J .GT. 1) THEN
+                     print *, "gemm"
                      CALL DGEMMFT( 'No transpose', 'Transpose', N-J-JB+1,
      $                        JB, J-1, -ONE, A(J+JB,1), LDA, A( J, 1 ),
      $                        LDA, ONE, A( J+JB, J ), LDA,
@@ -280,6 +282,7 @@
      $                        CHKV, LDV)
                   END IF
 
+                  print *, "trsm"
                   CALL DTRSMFT( 'Right', 'Lower', 'Transpose',
      $                         'Non-unit',
      $                        N-J-JB+1, JB, ONE, A( J, J ), LDA,
