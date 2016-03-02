@@ -1,6 +1,6 @@
       program hello
 
-      integer,parameter :: N = 8      
+      integer,parameter :: N = 16
       double precision :: upper (N, N)
       double precision :: lower (N, N)
       double precision :: matrix (N, N)
