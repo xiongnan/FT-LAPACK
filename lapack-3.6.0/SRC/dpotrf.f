@@ -175,7 +175,7 @@
 *     Determine the block size for this environment.
 *
       NB = ILAENV( 1, 'DPOTRF', UPLO, N, -1, -1, -1 )
-      NB = 2
+      NB = 4
       IF( NB.LE.1 .OR. NB.GE.N ) THEN
 *
 *        Use unblocked code.
@@ -237,7 +237,7 @@
             DO 100 J = 1, N, NB
                CALL DGEMM ('No transpose', 'No transpose', NCHK, N, NB, 
      $                     ONE, CHKV(1, 1), LDV, A(J, 1), LDA, ZERO, 
-     $                     CHKM((J/NB)*2, LDM))
+     $                     CHKM((J/NB)*2+1, LDM))
  100        CONTINUE
             print *, "done encode chksum"
 *
