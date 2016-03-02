@@ -194,7 +194,7 @@
 *     ..
 *     .. Array Arguments ..
       DOUBLE PRECISION A(LDA,*),B(LDB,*),CHKB(LDCB,*),
-     &                 CHKAR(16,16),CHKBR(16,16),CHKV(2,16)
+      DOUBLE PRECISION CHKAR(16,16),CHKBR(16,16),CHKV(2,16)
 *     ..
       EXTERNAL DTRSM,DGEMMX
 

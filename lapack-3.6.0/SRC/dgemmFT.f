@@ -200,8 +200,8 @@
 *     ..
 *     .. Array Arguments ..
       DOUBLE PRECISION A(LDA,*),B(LDB,*),C(LDC,*),CHKA(LDCA,*),
-     &                 CHKC(LDCC,*),CHKV(2,16),
-     &                 CHKAR(16,16),CHKBR(16,16),CHKCR(16,16)
+      DOUBLE PRECISION CHKC(LDCC,*),CHKV(2,16),
+      DOUBLE PRECISION CHKAR(16,16),CHKBR(16,16),CHKCR(16,16)
 *     ..
       EXTERNAL DGEMM
 

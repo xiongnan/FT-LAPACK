@@ -118,7 +118,7 @@
 *     ..
 *     .. Array Arguments ..
       DOUBLE PRECISION   A( LDA, * ),CHKA(LDCA,*),CHKV(2,16),
-     &                   CHKAR(16,16)
+      DOUBLE PRECISION CHKAR(16,16)
 *     ..
       EXTERNAL DPOTRF2, DGEMM
 
