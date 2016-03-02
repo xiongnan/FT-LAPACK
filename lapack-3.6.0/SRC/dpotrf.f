@@ -250,8 +250,10 @@
 *
                JB = MIN( NB, N-J+1 )
                print *, J
-               CALL DSYRK( 'Lower', 'No transpose', JB, J-1, -ONE,
-     $                     A( J, 1 ), LDA, ONE, A( J, J ), LDA)
+               IF (J .GT. 1) THEN
+                  CALL DSYRK( 'Lower', 'No transpose', JB, J-1, -ONE,
+     $                       A( J, 1 ), LDA, ONE, A( J, J ), LDA)
+               END IF
 
 *               CALL DSYRKFT( 'Lower', 'No transpose', JB, J-1, -ONE,
 *     $                     A( J, 1 ), LDA, ONE, A( J, J ), LDA,
@@ -269,12 +271,14 @@
 *
 *                 Compute the current block column.
 *
-                  CALL DGEMMFT( 'No transpose', 'Transpose', N-J-JB+1,
+                  IF (J .GT. 1) THEN
+                     CALL DGEMMFT( 'No transpose', 'Transpose', N-J-JB+1,
      $                        JB, J-1, -ONE, A(J+JB,1), LDA, A( J, 1 ),
      $                        LDA, ONE, A( J+JB, J ), LDA,
      $                        CHKM((J/NB)*2+3, 1),LDM,
      $                        CHKM((J/NB)*2+3,J), LDM,
      $                        CHKV, LDV)
+                  END IF
 
                   CALL DTRSMFT( 'Right', 'Lower', 'Transpose',
      $                         'Non-unit',
