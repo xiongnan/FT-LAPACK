@@ -218,14 +218,14 @@
 *
       CALL DTRSM(SIDE, UPLO,TRANSA,DIAG,(M/N)*2,N,ALPHA,A,LDA,CHKB,LDCB)
       
-      PRINT *, "TRSMK UPDATED MATRIX"
+      PRINT *, "TRSM UPDATED MATRIX"
 
       DO I=1, M
          Print 100, ( B(I,J), J=1,N )
       end do
 
-      PRINT *, "SYRK UPDATED CHKSUM"
-      DO I=1, (M/N)/2
+      PRINT *, "TRSM UPDATED CHKSUM"
+      DO I=1, (M/N)*2
          Print 100, ( CHKB(I,J), J=1,N )
       end do
       
