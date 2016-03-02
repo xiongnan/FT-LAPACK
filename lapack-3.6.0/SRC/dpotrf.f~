@@ -142,8 +142,8 @@
       EXTERNAL           LSAME, ILAENV
 *     ..
 *     .. External Subroutines ..
-      EXTERNAL           DGEMM, POTRF2, DSYRK, DTRSM,
-      EXTERNAL           DGEMMFT, DPOTRF2FT, DSYRKFT, DTRSMFT, XERBLA
+      EXTERNAL           DGEMM, POTRF2, DSYRK, DTRSM
+      EXTERNAL           DGFT, DPOTRF2FT, DSYRKFT, DTRSMFT, XERBLA
 *     ..
 *     .. Intrinsic Functions ..
       INTRINSIC          MAX, MIN
@@ -233,7 +233,7 @@
             DO 100 J = 1, N, NB
                CALL DGEMM ('No transpose', 'No transpose', NCHK, N, NB, 
      $                     ONE, CHKV(1, 1), LDV, A(J, 1), LDA, ZERO, 
-     $                     CHM(J/NB*2), LDM)
+     $                     CHKM((J/NB)*2, LDM))
  100        CONTINUE
             
 *
@@ -263,7 +263,7 @@
 *
 *                 Compute the current block column.
 *
-                  CALL DGEMMFT( 'No transpose', 'Transpose', N-J-JB+1,
+                  CALL DGFT( 'No transpose', 'Transpose', N-J-JB+1,
      $                        JB, J-1, -ONE, A(J+JB,1), LDA, A( J, 1 ),
      $                        LDA, ONE, A( J+JB, J ), LDA,
      $                        CHKM((J/NB)*2+3, 1),LDM,
