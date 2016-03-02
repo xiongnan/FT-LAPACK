@@ -247,7 +247,7 @@
          Print 100, ( CHKC(I,J), J=1,N )
       end do
       
- 100  format (1x, 16(1x,f5.1))
+ 100  format (1x, 16(1x,f7.1))
 
 
       RETURN

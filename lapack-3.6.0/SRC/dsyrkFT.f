@@ -219,7 +219,7 @@
 
       
 
- 100  format (1x, 16(1x,f5.1))
+ 100  format (1x, 16(1x,f7.1))
       RETURN
 *
 *     End of DSYRKFT .
