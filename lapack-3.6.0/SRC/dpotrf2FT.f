@@ -129,6 +129,7 @@
       ZERO=0.0D+0
       ALPHA=-1.0D+0
       LDCR=16
+      LDAR=16
 
       CALL DGEMM('No transpose','No transpose',2,N,N,ALPHA,CHKV,LDCV,
      &            A,LDA,ZERO,CHKAR,LDAR)
