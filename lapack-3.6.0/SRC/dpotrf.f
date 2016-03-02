@@ -252,15 +252,15 @@
                print *, J
                IF (J .GT. 1) THEN
                   print *, "syrk"
-                  CALL DSYRK( 'Lower', 'No transpose', JB, J-1, -ONE,
-     $                       A( J, 1 ), LDA, ONE, A( J, J ), LDA)
+*                  CALL DSYRK( 'Lower', 'No transpose', JB, J-1, -ONE,
+*     $                       A( J, 1 ), LDA, ONE, A( J, J ), LDA)
+*               END IF
+
+               CALL DSYRKFT( 'Lower', 'No transpose', JB, J-1, -ONE,
+     $                     A( J, 1 ), LDA, ONE, A( J, J ), LDA,
+     $                     CHKM((J/NB)*2+1,1), LDM, CHKM((J/NB)*2+1, J),
+     $                     LDM, CHKV, LDV)
                END IF
-
-*               CALL DSYRKFT( 'Lower', 'No transpose', JB, J-1, -ONE,
-*     $                     A( J, 1 ), LDA, ONE, A( J, J ), LDA,
-*     $                     CHKM((J/NB)*2+1,1), LDM, CHKM((J/NB)*2+1, J),
-*     $                     LDM, CHKV, LDV)
-
                print *, "potrf2"
                CALL DPOTRF2FT( 'Lower', JB, A( J, J ), LDA, INFO,
      $                        CHKM((J/NB)*2+1, J), LDM, CHKV, LDV)
