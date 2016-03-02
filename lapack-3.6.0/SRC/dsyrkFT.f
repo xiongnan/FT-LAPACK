@@ -209,12 +209,12 @@
       PRINT *, "SYRK UPDATED MATRIX"
       
       DO I=1, N
-         Print 100, ( A(I,J), J=1,N )
+         Print 100, ( C(I,J), J=1,N )
       end do
 
       PRINT *, "SYRK UPDATED CHKSUM"
       DO I=1, 2
-         Print 100, ( CHKA(I,J), J=1,N )
+         Print 100, ( CHKC(I,J), J=1,N )
       end do
 
       
