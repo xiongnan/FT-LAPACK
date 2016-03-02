@@ -189,14 +189,17 @@
 
 *         real, dimension (:,:), allocatable :: checksum_vector
 *         allocate ( checksum_vector(2, NB) )
-*         do I = 1, NB
-*            checksum_vector(1,I) = 1.0
-*            print*, "checksum_vector(",1,",",I,") = ", checksum_vector(1,I)
-*         end do
-*
-*            checksum_vector(2,I) = I
-*            print*, "checksum_vector(",2,",",I,") = ", checksum_vector(2,I)
-*         end do
+         DO I = 1, 4
+            CHKV(1,I) = 1.0
+            CHKV(2,I) = I;
+         END DO
+
+         print *, "checksum vector:"
+         do I=1, 2
+            Print 123, ( CHKV(I,J), J=1,4 )
+         end do
+ 123     format (1x, 16(1x,f5.1))
+         
 *
 *        Use blocked code.
 *
