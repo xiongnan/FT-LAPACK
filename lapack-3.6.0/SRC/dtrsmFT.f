@@ -180,7 +180,7 @@
 *>
 *  =====================================================================
       SUBROUTINE DTRSMFT(SIDE,UPLO,TRANSA,DIAG,M,N,ALPHA,A,LDA,B,LDB,
-     &                   CHKB,LDCB,CHKV,LDCV)
+     &                   CHKA,LDCA,CHKB,LDCB,CHKV,LDCV)
 *
 *  -- Reference BLAS level3 routine (version 3.4.0) --
 *  -- Reference BLAS is a software package provided by Univ. of Tennessee,    --
@@ -189,11 +189,11 @@
 *
 *     .. Scalar Arguments ..
       DOUBLE PRECISION ALPHA,ZERO
-      INTEGER LDA,LDB,M,N,LDCB,LDAR,LDBR,LDCV
+      INTEGER LDA,LDB,M,N,LDCA,LDCB,LDAR,LDBR,LDCV
       CHARACTER DIAG,SIDE,TRANSA,UPLO
 *     ..
 *     .. Array Arguments ..
-      DOUBLE PRECISION A(LDA,*),B(LDB,*),CHKB(LDCB,*)
+      DOUBLE PRECISION A(LDA,*),B(LDB,*),CHKB(LDCB,*),CHKA(LDCA,*)
       DOUBLE PRECISION CHKAR(16,16),CHKBR(16,16),CHKV(2,16)
 *     ..
       EXTERNAL DTRSM,DGEMMX

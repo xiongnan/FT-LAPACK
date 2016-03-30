@@ -277,6 +277,7 @@
      $                        JB, J-1, -ONE, A(J+JB,1), LDA, A( J, 1 ),
      $                        LDA, ONE, A( J+JB, J ), LDA,
      $                        CHKM((J/NB)*2+3, 1),LDM,
+     $                        CHKM((J/NB)*2+1, 1),LDM,
      $                        CHKM((J/NB)*2+3,J), LDM,
      $                        CHKV, LDV)
                   END IF
@@ -285,7 +286,8 @@
                   CALL DTRSMFT( 'Right', 'Lower', 'Transpose',
      $                         'Non-unit',
      $                        N-J-JB+1, JB, ONE, A( J, J ), LDA,
-     $                        A( J+JB,J), LDA,CHKM((J/NB)*2+3, J), LDM,
+     $                        A( J+JB,J), LDA,CHKM((J/NB)*2+1,J),LDM,
+     $                        CHKM((J/NB)*2+3, J), LDM,
      $                        CHKV, LDV)
                END IF
    20       CONTINUE

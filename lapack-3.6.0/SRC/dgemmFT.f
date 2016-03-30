@@ -186,7 +186,7 @@
 *>
 *  =====================================================================
       SUBROUTINE DGEMMFT(TRANSA,TRANSB,M,N,K,ALPHA,A,LDA,B,LDB,BETA,C,
-     &                   LDC, CHKA,LDCA,CHKC,LDCC,CHKV,LDCV)
+     &                   LDC, CHKA,LDCA,CHKB,LDCB,CHKC,LDCC,CHKV,LDCV)
 *
 *  -- Reference BLAS level3 routine (version 3.6.0) --
 *  -- Reference BLAS is a software package provided by Univ. of Tennessee,    --
@@ -195,12 +195,12 @@
 *
 *     .. Scalar Arguments ..
       DOUBLE PRECISION ALPHA,BETA,ZERO
-      INTEGER K,LDA,LDB,LDC,M,N,LDCA,LDCC,LDCV,LDAR,LDVR,LDCR
+      INTEGER K,LDA,LDB,LDC,M,N,LDCA,LDCB,LDCC,LDCV,LDAR,LDVR,LDCR
       CHARACTER TRANSA,TRANSB
 *     ..
 *     .. Array Arguments ..
       DOUBLE PRECISION A(LDA,*),B(LDB,*),C(LDC,*),CHKA(LDCA,*)
-      DOUBLE PRECISION CHKC(LDCC,*),CHKV(2,16)
+      DOUBLE PRECISION CHKB(LDCB,*),CHKC(LDCC,*),CHKV(2,16)
       DOUBLE PRECISION CHKAR(16,16),CHKBR(16,16),CHKCR(16,16)
 *     ..
       EXTERNAL DGEMM

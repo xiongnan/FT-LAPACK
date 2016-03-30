@@ -269,7 +269,6 @@
                IF( INFO.NE.0 )
      $            GO TO 30
                IF( J+JB.LE.N ) THEN
-*
 *                 Compute the current block column.
 *
                   IF (J .GT. 1) THEN
