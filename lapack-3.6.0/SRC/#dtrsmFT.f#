@@ -218,22 +218,22 @@
 
       PRINT *, "TRSM NEW CHECKSUM OF A"
       DO I=1,2
-         PRINT 100, ( CHKAR(I,J),I=1,N)
+         PRINT 100, ( CHKAR(I,J),J=1,N)
       END DO
 
       PRINT *, "TRSM OLD CHECKSUM OF A"
       DO I=1,2
-         PRINT 100, ( CHKA(I,I),I=1,N)
+         PRINT 100, ( CHKA(I,I),J=1,N)
       END DO
 
       PRINT *, "TRSM NEW CHECKSUM OF B"
       DO I=1,(M/N)*2
-         PRINT 100, ( CHKBR(I,J),I=1,N)
+         PRINT 100, ( CHKBR(I,J),J=1,N)
       END DO
 
       PRINT *, "TRSM OLD CHECKSUM OF B"
       DO I=1,(M/N)*2
-         PRINT 100, (CHKB(I,J),I=1,N)
+         PRINT 100, (CHKB(I,J),J=1,N)
       END DO
 
 

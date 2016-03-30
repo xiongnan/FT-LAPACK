@@ -229,6 +229,35 @@
      &              C(J,1),LDC,ZERO,CHKCR((J/N)*2+1,1),LDCR)
  20   CONTINUE   
 
+      PRINT *, "GEMM NEW CHECKSUM OF A"
+      DO I=1,(M/N)*2
+         PRINT 100, (CHKAR(I,J),J=1,K)
+      END DO
+
+      PRINT *,"GEMM OLD CHECKSUM OF A"
+      DO I=1,(M/N)*2
+         PRINT 100, (CHKA(I,J),J=1,K)
+      END DO
+
+      PRINT *, "GEMM NEW CHECKSUM OF B"
+      DO I=1,2
+         PRINT *, ( CHKBR(I,J),J=1,K)
+      END DO
+
+      PRINT *, "GEMM OLD CHECKSUM OF B"
+      DO I=1,2
+         PRINT *, (CHKB(I,J), J=1,K)
+      END DO
+
+      PRINT *, "GEMM NEW CHECKSUM OF C"
+      DO I=1,(M/N)*2
+         PRINT *, (CHKCR(I,J), J=1,N)
+      END DO
+
+      PRINT *, "GEMM OLD CHECKSUM OF C"
+      DO I=1,(M/N)*2
+         PRINT *, (CHKC(I,J), J=1,N)
+      END DO
 
 
       CALL DGEMM(TRANSA, TRANSB, M,N,K,ALPHA,A,LDA,B,LDB,BETA,C,LDC)
@@ -236,16 +265,16 @@
       CALL DGEMM(TRANSA,TRANSB,(M/N)*2,N,K,ALPHA,CHKA,LDCA,B,LDB,
      &            BETA,CHKC,LDCC )
 
-      PRINT *, "GEMM UPDATED MATRIX"
+*      PRINT *, "GEMM UPDATED MATRIX"
 
-      DO I=1, M
-         Print 100, ( C(I,J), J=1,N )
-      end do
+*      DO I=1, M
+*         Print 100, ( C(I,J), J=1,N )
+*      end do
 
-      PRINT *, "GEMM UPDATED CHKSUM"
-      DO I=1, (M/N)*2
-         Print 100, ( CHKC(I,J), J=1,N )
-      end do
+*      PRINT *, "GEMM UPDATED CHKSUM"
+*      DO I=1, (M/N)*2
+*         Print 100, ( CHKC(I,J), J=1,N )
+*      end do
       
  100  format (1x, 16(1x,f7.1))
 

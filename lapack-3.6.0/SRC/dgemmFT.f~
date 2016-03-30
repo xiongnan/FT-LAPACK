@@ -199,9 +199,9 @@
       CHARACTER TRANSA,TRANSB
 *     ..
 *     .. Array Arguments ..
-      DOUBLE PRECISION A(LDA,*),B(LDB,*),C(LDC,*),CHKA(LDCA,*),
-     &                 CHKC(LDCC,*),CHKV(2,16),
-     &                 CHKAR(16,16),CHKBR(16,16),CHKCR(16,16)
+      DOUBLE PRECISION A(LDA,*),B(LDB,*),C(LDC,*),CHKA(LDCA,*)
+      DOUBLE PRECISION CHKC(LDCC,*),CHKV(2,16)
+      DOUBLE PRECISION CHKAR(16,16),CHKBR(16,16),CHKCR(16,16)
 *     ..
       EXTERNAL DGEMM
 
@@ -221,12 +221,12 @@
       
       DO 10 J=1, M, N
          CALL DGEMM('No transpose','No transpose',2,K,N,BETA,CHKV,LDCV,
-     &              A(J,1),LDA,ZERO,CHKAR((J/N)*2,1),LDAR)
+     &              A(J,1),LDA,ZERO,CHKAR((J/N)*2+1,1),LDAR)
  10   CONTINUE
 
       DO 20 J=1, M, N
          CALL DGEMM('No transpose','No transpose',2,N,N,BETA,CHKV,LDCV,
-     &              C(J,1),LDC,ZERO,CHKCR((J/N)*2),1),LDCR)
+     &              C(J,1),LDC,ZERO,CHKCR((J/N)*2+1,1),LDCR)
  20   CONTINUE   
 
 
@@ -247,7 +247,7 @@
          Print 100, ( CHKC(I,J), J=1,N )
       end do
       
- 100  format (1x, 16(1x,f5.1))
+ 100  format (1x, 16(1x,f7.1))
 
 
       RETURN

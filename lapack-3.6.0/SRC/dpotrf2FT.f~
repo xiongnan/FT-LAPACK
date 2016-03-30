@@ -117,8 +117,8 @@
       DOUBLE PRECISION   ZERO, ALPHA
 *     ..
 *     .. Array Arguments ..
-      DOUBLE PRECISION   A( LDA, * ),CHKA(LDCA,*),CHKV(2,16),
-     &                   CHKAR(16,16)
+      DOUBLE PRECISION   A( LDA, * ),CHKA(LDCA,*),CHKV(2,16)
+      DOUBLE PRECISION CHKAR(16,16)
 *     ..
       EXTERNAL DPOTRF2, DGEMM
 
@@ -129,14 +129,18 @@
       ZERO=0.0D+0
       ALPHA=-1.0D+0
       LDCR=16
+      LDAR=16
 
       CALL DGEMM('No transpose','No transpose',2,N,N,ALPHA,CHKV,LDCV,
      &            A,LDA,ZERO,CHKAR,LDAR)
 
       CALL DPOTRF2( UPLO, N, A, LDA, INFO)
       DO J=1, N
-         CHKA(J)=CHKA(J)/A(J,J)
-         CHKA(J+1:N)=CHKA(J+1:N)-CHKA(J)*A(J+1:N,J)
+         CHKA(1,J)=CHKA(1,J)/A(J,J)
+         CHKA(2,J)=CHKA(2,J)/A(J,J)
+         CHKA(1,J+1:N)=CHKA(1,J+1:N)-CHKA(1,J)*A(J+1:N,J)
+         CHKA(2,J+1:N)=CHKA(2,J+1:N)-CHKA(2,J)*A(J+1:N,J)
+
       END DO
 
       PRINT *, "POTRF2 UPDATED MATRIX"
@@ -150,7 +154,7 @@
          Print 100, ( CHKA(I,J), J=1,N )
       end do
       
- 100  format (1x, 16(1x,f5.1))
+ 100  format (1x, 16(1x,f7.1))
 
       RETURN
 

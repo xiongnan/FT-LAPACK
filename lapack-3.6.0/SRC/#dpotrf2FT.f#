@@ -134,13 +134,13 @@
       CALL DGEMM('No transpose','No transpose',2,N,N,ALPHA,CHKV,LDCV,
      &            A,LDA,ZERO,CHKAR,LDAR)
 
-      PRINT *, "DOTRF2 NEW CHECKSUM OF A"
+      PRINT *, "POTRF2 NEW CHECKSUM OF A"
       
       DO I=1,2
          PRINT 100,( CHKAR(I,J),J=1,N)
       end do
 
-      PRINT *, "DOTRF2 OLD CHECKSUM OF A"
+      PRINT *, "POTRF2 OLD CHECKSUM OF A"
 
       DO I=1,2
          PRINT 100, (CHKA(I,J),J=1,N)
