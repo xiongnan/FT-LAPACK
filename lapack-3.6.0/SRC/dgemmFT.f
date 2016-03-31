@@ -241,22 +241,22 @@
 
       PRINT *, "GEMM NEW CHECKSUM OF B"
       DO I=1,2
-         PRINT *, ( CHKBR(I,J),J=1,K)
+         PRINT 100, ( CHKBR(I,J),J=1,K)
       END DO
 
       PRINT *, "GEMM OLD CHECKSUM OF B"
       DO I=1,2
-         PRINT *, (CHKB(I,J), J=1,K)
+         PRINT 100, (CHKB(I,J), J=1,K)
       END DO
 
       PRINT *, "GEMM NEW CHECKSUM OF C"
       DO I=1,(M/N)*2
-         PRINT *, (CHKCR(I,J), J=1,N)
+         PRINT 100, (CHKCR(I,J), J=1,N)
       END DO
 
       PRINT *, "GEMM OLD CHECKSUM OF C"
       DO I=1,(M/N)*2
-         PRINT *, (CHKC(I,J), J=1,N)
+         PRINT 100, (CHKC(I,J), J=1,N)
       END DO
 
 

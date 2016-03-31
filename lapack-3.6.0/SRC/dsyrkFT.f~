@@ -200,22 +200,46 @@
       CALL DGEMM('No transpose','No transpose',2,N,N,BETA,CHKV,LDCV,
      &            C,LDC,ZERO,CHKCR,LDCR)
 
+      PRINT *, "SYRK NEW CHECKSUM OF A"
+      
+      DO I=1,2
+         Print 100,( CHKAR(I,J),J=1,K)
+      end do
+
+      PRINT *, "SYRK OLD CHECKSUM OF A"
+
+      DO I=1,2
+         PRINT 100, (CHKA(I,J),J=1,K)
+      END DO
+
+      PRINT *, "SYRK NEW CHECKSUM OF C"
+      
+      DO I=1,2
+         PRINT 100, (CHKAR(I,J),J=1,N)
+      END DO
+
+      PRINT *, "SYRK OLD CHECKSUM OF C"
+      DO I=1,2
+         PRINT 100, (CHKC(I,J),J=1,N)
+      END DO
+
+
       CALL DSYRK(UPLO, TRANS, N, K, ALPHA, A, LDA, BETA, C, LDC)
       
       CALL DGEMM('No transpose', 'Transpose', 2, N, K, ALPHA, CHKA, 
      &           LDCA, A, LDA, BETA, CHKC, LDCC)
 
 
-      PRINT *, "SYRK UPDATED MATRIX"
+*      PRINT *, "SYRK UPDATED MATRIX"
       
-      DO I=1, N
-         Print 100, ( C(I,J), J=1,N )
-      end do
+*      DO I=1, N
+*         Print 100, ( C(I,J), J=1,N )
+*      end do
 
-      PRINT *, "SYRK UPDATED CHKSUM"
-      DO I=1, 2
-         Print 100, ( CHKC(I,J), J=1,N )
-      end do
+*      PRINT *, "SYRK UPDATED CHKSUM"
+*      DO I=1, 2
+*         Print 100, ( CHKC(I,J), J=1,N )
+*      end do
 
       
 

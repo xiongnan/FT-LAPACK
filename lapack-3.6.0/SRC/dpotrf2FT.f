@@ -114,7 +114,7 @@
 *     .. Scalar Arguments ..
       CHARACTER          UPLO
       INTEGER            INFO, LDA, N,LDCA,LDCV,LDAR
-      DOUBLE PRECISION   ZERO, ALPHA
+      DOUBLE PRECISION   ZERO, ALPHA, ONE
 *     ..
 *     .. Array Arguments ..
       DOUBLE PRECISION   A( LDA, * ),CHKA(LDCA,*),CHKV(2,16)
@@ -128,10 +128,11 @@
 *
       ZERO=0.0D+0
       ALPHA=-1.0D+0
+      ONE=1.0D+0
       LDCR=16
       LDAR=16
 
-      CALL DGEMM('No transpose','No transpose',2,N,N,ALPHA,CHKV,LDCV,
+      CALL DGEMM('No transpose','No transpose',2,N,N,ONE,CHKV,LDCV,
      &            A,LDA,ZERO,CHKAR,LDAR)
 
       PRINT *, "POTRF2 NEW CHECKSUM OF A"

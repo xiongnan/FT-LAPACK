@@ -215,7 +215,7 @@
       PRINT *, "SYRK NEW CHECKSUM OF C"
       
       DO I=1,2
-         PRINT 100, (CHKAR(I,J),J=1,N)
+         PRINT 100, (CHKCR(I,J),J=1,N)
       END DO
 
       PRINT *, "SYRK OLD CHECKSUM OF C"
