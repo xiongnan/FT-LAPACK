@@ -224,8 +224,10 @@
       END DO
 
 
-      CALL DSYRK(UPLO, TRANS, N, K, ALPHA, A, LDA, BETA, C, LDC)
-      
+*      CALL DSYRK(UPLO, TRANS, N, K, ALPHA, A, LDA, BETA, C, LDC)
+      CALL DGEMM('No transpose', 'Transpose', N, N, K, ALPHA, A, LDA, A,
+     &     LDA, BETA, C, LDC)
+
       CALL DGEMM('No transpose', 'Transpose', 2, N, K, ALPHA, CHKA, 
      &           LDCA, A, LDA, BETA, CHKC, LDCC)
 
