@@ -223,7 +223,7 @@
 
       PRINT *, "TRSM OLD CHECKSUM OF A"
       DO I=1,2
-         PRINT 100, ( CHKA(I,I),J=1,N)
+         PRINT 100, ( CHKA(I,J),J=1,N)
       END DO
 
       PRINT *, "TRSM NEW CHECKSUM OF B"
