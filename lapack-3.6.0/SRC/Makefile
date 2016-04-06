@@ -262,7 +262,7 @@ endif
 ZCLASRC = cpotrs.o cgetrs.o cpotrf.o cgetrf.o 
 
 DLASRC = \
-   dpotrf2.o dpotrf2FT.o dsyrkFT.o dgemmFT.o dtrsmFT.o dgetrf2.o \
+   dpotrf2.o dpotrf2FT.o dsyrkFT.o dgemmFT.o dtrsmFT.o checkFT.o dgetrf2.o \
    dbdsvdx.o \
    dgbbrd.o dgbcon.o dgbequ.o dgbrfs.o dgbsv.o  \
    dgbsvx.o dgbtf2.o dgbtrf.o dgbtrs.o dgebak.o dgebal.o dgebd2.o \
