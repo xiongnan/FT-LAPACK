@@ -25,11 +25,11 @@
                d1abs = -1 * d1
             END IF
 
-*            IF (d1abs.GT. e)
-*          print *,"maybe error"
-*          x = NINT(d2/d1)
-*               A((I-1)*B+X,J) += d1
-*            end if
+            IF (d1abs.GT. e) THEN
+               print *,"maybe error"
+               x = NINT(d2/d1)
+               A((I-1)*B+X,J) += d1
+            end if
          end do 
       end do
       print *, "done"
