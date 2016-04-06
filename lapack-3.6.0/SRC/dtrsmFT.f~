@@ -180,7 +180,7 @@
 *>
 *  =====================================================================
       SUBROUTINE DTRSMFT(SIDE,UPLO,TRANSA,DIAG,M,N,ALPHA,A,LDA,B,LDB,
-     &                   CHKB,LDCB,CHKV,LDCV)
+     &                   CHKA,LDCA,CHKB,LDCB,CHKV,LDCV)
 *
 *  -- Reference BLAS level3 routine (version 3.4.0) --
 *  -- Reference BLAS is a software package provided by Univ. of Tennessee,    --
@@ -188,12 +188,12 @@
 *     November 2011
 *
 *     .. Scalar Arguments ..
-      DOUBLE PRECISION ALPHA,ZERO
-      INTEGER LDA,LDB,M,N,LDCB,LDAR,LDBR,LDCV
+      DOUBLE PRECISION ALPHA,ZERO,ONE
+      INTEGER LDA,LDB,M,N,LDCA,LDCB,LDAR,LDBR,LDCV
       CHARACTER DIAG,SIDE,TRANSA,UPLO
 *     ..
 *     .. Array Arguments ..
-      DOUBLE PRECISION A(LDA,*),B(LDB,*),CHKB(LDCB,*)
+      DOUBLE PRECISION A(LDA,*),B(LDB,*),CHKB(LDCB,*),CHKA(LDCA,*)
       DOUBLE PRECISION CHKAR(16,16),CHKBR(16,16),CHKV(2,16)
 *     ..
       EXTERNAL DTRSM,DGEMMX
@@ -204,11 +204,17 @@
       INTEGER J
       LDAR=16
       LDBR=16
-
+      ONE=1.0D+0
       ZERO=0.0D+0
 
-      CALL DGEMM('No transpose','No transpose',2,N,N,ALPHA,CHKV,LDCV,
-     &           A,LDA,ZERO,CHKAR,LDAR)
+      DO I=1,2
+         DO J=1,N
+            CHKAR(I,J)=CHKV(I,J)
+         END DO
+      END DO
+
+      CALL DTRMM('R','L','N','N',2,N,ONE,A,LDA,
+     &           CHKAR,LDAR)
       
       DO 10 J=1, M, N
          CALL DGEMM('No transpose','No transpose',2,N,N,ALPHA,CHKV,LDCV,
@@ -216,20 +222,41 @@
 
  10   CONTINUE
 
+      PRINT *, "TRSM NEW CHECKSUM OF A"
+      DO I=1,2
+         PRINT 100, ( CHKAR(I,J),J=1,N)
+      END DO
+
+      PRINT *, "TRSM OLD CHECKSUM OF A"
+      DO I=1,2
+         PRINT 100, ( CHKA(I,J),J=1,N)
+      END DO
+
+      PRINT *, "TRSM NEW CHECKSUM OF B"
+      DO I=1,(M/N)*2
+         PRINT 100, ( CHKBR(I,J),J=1,N)
+      END DO
+
+      PRINT *, "TRSM OLD CHECKSUM OF B"
+      DO I=1,(M/N)*2
+         PRINT 100, (CHKB(I,J),J=1,N)
+      END DO
+
+
       CALL DTRSM(SIDE, UPLO, TRANSA,DIAG,M,N,ALPHA,A,LDA,B,LDB)
 *
       CALL DTRSM(SIDE, UPLO,TRANSA,DIAG,(M/N)*2,N,ALPHA,A,LDA,CHKB,LDCB)
       
-      PRINT *, "TRSM UPDATED MATRIX"
+*      PRINT *, "TRSM UPDATED MATRIX"
 
-      DO I=1, M
-         Print 100, ( B(I,J), J=1,N )
-      end do
+*      DO I=1, M
+*         Print 100, ( B(I,J), J=1,N )
+*      end do
 
-      PRINT *, "TRSM UPDATED CHKSUM"
-      DO I=1, (M/N)*2
-         Print 100, ( CHKB(I,J), J=1,N )
-      end do
+*      PRINT *, "TRSM UPDATED CHKSUM"
+*      DO I=1, (M/N)*2
+*         Print 100, ( CHKB(I,J), J=1,N )
+*      end do
       
  100  format (1x, 16(1x,f7.1))
 

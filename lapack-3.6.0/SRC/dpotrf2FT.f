@@ -147,6 +147,10 @@
          PRINT 100, (CHKA(I,J),J=1,N)
       END DO
 
+      checkFT(A,LDA,N,N,N,CHKA,LDCA,CHKAR,LDAR)
+         
+
+
 
       CALL DPOTRF2( UPLO, N, A, LDA, INFO)
       DO J=1, N

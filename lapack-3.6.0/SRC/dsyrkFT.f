@@ -184,7 +184,7 @@
       DOUBLE PRECISION A(LDA,*),C(LDC,*),CHKA(LDCA,*),CHKC(LDCC,*)
       DOUBLE PRECISION CHKAR(16,16),CHKCR(16,16),CHKV(2,16)
 *     ..
-      EXTERNAL DSYRK,DGEMM
+      EXTERNAL DSYRK,DGEMM,checkFT
       
 *
 *  =====================================================================
@@ -223,6 +223,8 @@
          PRINT 100, (CHKC(I,J),J=1,N)
       END DO
 
+      checkFT(A,LDA,N,N,K,CHKA,LDCA,CHKAR,LDAR)
+      checkFT(C,LDC,N,N,N,CHKC,LDCC,CHKCR,LDCR)
 
 *      CALL DSYRK(UPLO, TRANS, N, K, ALPHA, A, LDA, BETA, C, LDC)
       CALL DGEMM('No transpose', 'Transpose', N, N, K, ALPHA, A, LDA, A,
