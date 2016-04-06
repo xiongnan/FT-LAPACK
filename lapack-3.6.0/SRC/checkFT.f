@@ -27,4 +27,4 @@
             end if
          end do
       end do
-      print*,"done"
+      print *, "done"
