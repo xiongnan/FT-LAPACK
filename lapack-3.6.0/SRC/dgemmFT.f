@@ -203,7 +203,7 @@
       DOUBLE PRECISION CHKB(LDCB,*),CHKC(LDCC,*),CHKV(2,16)
       DOUBLE PRECISION CHKAR(16,16),CHKBR(16,16),CHKCR(16,16)
 *     ..
-      EXTERNAL DGEMM
+      EXTERNAL DGEMM,checkFT
 
 
 *  =====================================================================
