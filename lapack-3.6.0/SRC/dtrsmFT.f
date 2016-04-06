@@ -188,7 +188,7 @@
 *     November 2011
 *
 *     .. Scalar Arguments ..
-      DOUBLE PRECISION ALPHA,ZERO
+      DOUBLE PRECISION ALPHA,ZERO,ONE
       INTEGER LDA,LDB,M,N,LDCA,LDCB,LDAR,LDBR,LDCV
       CHARACTER DIAG,SIDE,TRANSA,UPLO
 *     ..
@@ -204,11 +204,17 @@
       INTEGER J
       LDAR=16
       LDBR=16
-
+      ONE=1.0D+0
       ZERO=0.0D+0
 
-      CALL DGEMM('No transpose','No transpose',2,N,N,ALPHA,CHKV,LDCV,
-     &           A,LDA,ZERO,CHKAR,LDAR)
+      DO I=1,2
+         DO J=1,N
+            CHKAR(I,J)=CHKV(I,J)
+         END DO
+      END DO
+
+      CALL DTRMM('R','L','N','N',2,N,ONE,A,LDA,
+     &           CHKAR,LDAR)
       
       DO 10 J=1, M, N
          CALL DGEMM('No transpose','No transpose',2,N,N,ALPHA,CHKV,LDCV,
