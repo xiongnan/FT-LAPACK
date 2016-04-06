@@ -147,7 +147,7 @@
          PRINT 100, (CHKA(I,J),J=1,N)
       END DO
 
-      checkFT(A,LDA,N,N,N,CHKA,LDCA,CHKAR,LDAR)
+      CALL checkFT(A,LDA,N,N,N,CHKA,LDCA,CHKAR,LDAR)
          
 
 
