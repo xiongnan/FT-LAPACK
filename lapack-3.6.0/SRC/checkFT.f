@@ -28,7 +28,7 @@
             IF (d1abs.GT. e) THEN
                print *,"maybe error"
                x = NINT(d2/d1)
-               A((I-1)*B+X,J) += d1
+               A((I-1)*B+X,J) = A((I-1)*B+X,J) + d1
             end if
          end do 
       end do
