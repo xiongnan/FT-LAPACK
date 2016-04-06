@@ -21,15 +21,15 @@
             d2 = C2-R2
             d1abs = d1
 
-            IF ( d1 .LT. 0.0D+0)
-               d1abs = -1 * d1
-            END IF
+*            IF ( d1 .LT. 0.0D+0)
+*               d1abs = -1 * d1
+*            END IF
 
-            IF (d1abs.GT. e)
-               print *,"maybe error"
-               x = NINT(d2/d1)
-               A((I-1)*B+X,J) += d1
-            end if
+*            IF (d1abs.GT. e)
+*          print *,"maybe error"
+*          x = NINT(d2/d1)
+*               A((I-1)*B+X,J) += d1
+*            end if
          end do 
       end do
       print *, "done"
