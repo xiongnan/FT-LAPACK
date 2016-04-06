@@ -1,7 +1,7 @@
       SUBROUTINE checkFT(A,LDA,M,B,N, CHKA, LDCA,CHKAR,LDAR)
 
       INTEGER           LDA, M, B, N, LDCA, LDAR,X,Y
-      DOUBLE PRECISION  C1, C2, R1, R2, d1, d2,e
+      DOUBLE PRECISION  C1, C2, R1, R2, d1, d2,e, d1abs
 
 *     ..Array Arguments ..
       DOUBLE PRECISION  A( LDA,*),CHKA(LDCA,*),CHKAR(LDAR,*)
@@ -19,8 +19,13 @@
             
             d1 = C1-R1
             d2 = C2-R2
+            d1abs = d1
 
-            IF (abs(d1) .GT. e)
+            IF ( d1 .LT. 0.0D+0)
+               d1abs = -1 * d1
+            END IF
+
+            IF (d1abs .GT. e)
                print *,"maybe error"
                x = NINT(d2/d1)
                A((I-1)*B+X,J) += d1
