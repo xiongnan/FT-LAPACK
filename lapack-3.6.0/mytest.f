@@ -4,6 +4,7 @@
       double precision :: upper (N, N)
       double precision :: lower (N, N)
       double precision :: matrix (N, N)
+      logical :: f
 
       integer :: i, j, info
       double precision :: temp
@@ -12,6 +13,7 @@
       
       one = 1.0
       zero = 0.0
+      f=.FALSE.
 
       !allocate ( upper(N, N) )
       !allocate ( lower(N, N) )
@@ -28,7 +30,7 @@
          end do
       end do
 
-      IF (false) THEN
+      IF (f) THEN
       Print *, "Lower:"
       do i=1, N
          Print 100, ( lower(i,j), j=1,N )
