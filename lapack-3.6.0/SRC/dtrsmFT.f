@@ -189,12 +189,14 @@
 *
 *     .. Scalar Arguments ..
       DOUBLE PRECISION ALPHA,ZERO,ONE
-      INTEGER LDA,LDB,M,N,LDCA,LDCB,LDAR,LDBR,LDCV
+      INTEGER LDA,LDB,M,N,LDCA,LDCB,LDAR,LDBR,LDCV,NN
+      PARAMETER (NN=1024)
       CHARACTER DIAG,SIDE,TRANSA,UPLO
 *     ..
 *     .. Array Arguments ..
       DOUBLE PRECISION A(LDA,*),B(LDB,*),CHKB(LDCB,*),CHKA(LDCA,*)
-      DOUBLE PRECISION CHKAR(16,16),CHKBR(16,16),CHKV(2,16)
+      DOUBLE PRECISION CHKAR(2,64)
+      DOUBLE PRECISION CHKBR((NN/N)*2,64),CHKV(2,64)
 *     ..
       EXTERNAL DTRSM,DGEMMX,checkFT
 
@@ -202,8 +204,8 @@
 *  =====================================================================
 *     ..Local Scalars ..
       INTEGER J
-      LDAR=16
-      LDBR=16
+      LDAR=2
+      LDBR=(NN/N)*2
       ONE=1.0D+0
       ZERO=0.0D+0
 
@@ -222,25 +224,25 @@
 
  10   CONTINUE
 
-      PRINT *, "TRSM NEW CHECKSUM OF A"
-      DO I=1,2
-         PRINT 100, ( CHKAR(I,J),J=1,N)
-      END DO
+*      PRINT *, "TRSM NEW CHECKSUM OF A"
+*      DO I=1,2
+*         PRINT 100, ( CHKAR(I,J),J=1,N)
+*      END DO
 
-      PRINT *, "TRSM OLD CHECKSUM OF A"
-      DO I=1,2
-         PRINT 100, ( CHKA(I,J),J=1,N)
-      END DO
+*      PRINT *, "TRSM OLD CHECKSUM OF A"
+*      DO I=1,2
+*         PRINT 100, ( CHKA(I,J),J=1,N)
+*      END DO
 
-      PRINT *, "TRSM NEW CHECKSUM OF B"
-      DO I=1,(M/N)*2
-         PRINT 100, ( CHKBR(I,J),J=1,N)
-      END DO
+*      PRINT *, "TRSM NEW CHECKSUM OF B"
+*      DO I=1,(M/N)*2
+*         PRINT 100, ( CHKBR(I,J),J=1,N)
+*      END DO
 
-      PRINT *, "TRSM OLD CHECKSUM OF B"
-      DO I=1,(M/N)*2
-         PRINT 100, (CHKB(I,J),J=1,N)
-      END DO
+*      PRINT *, "TRSM OLD CHECKSUM OF B"
+*      DO I=1,(M/N)*2
+*         PRINT 100, (CHKB(I,J),J=1,N)
+*      END DO
 
       CALL checkFT(A,LDA,N,N,N,CHKA,LDCA,CHKAR,LDAR)
       CALL checkFT(B,LDB,M,N,N,CHKB,LDCB,CHKBR,LDBR)

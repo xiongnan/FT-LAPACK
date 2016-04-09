@@ -117,8 +117,8 @@
       DOUBLE PRECISION   ZERO, ALPHA, ONE
 *     ..
 *     .. Array Arguments ..
-      DOUBLE PRECISION   A( LDA, * ),CHKA(LDCA,*),CHKV(2,16)
-      DOUBLE PRECISION CHKAR(16,16)
+      DOUBLE PRECISION   A( LDA, * ),CHKA(LDCA,*),CHKV(2,64)
+      DOUBLE PRECISION CHKAR(2,64)
 *     ..
       EXTERNAL DPOTRF2, DGEMM,checkFT
 
@@ -129,23 +129,22 @@
       ZERO=0.0D+0
       ALPHA=-1.0D+0
       ONE=1.0D+0
-      LDCR=16
-      LDAR=16
+      LDAR=2
 
       CALL DGEMM('No transpose','No transpose',2,N,N,ONE,CHKV,LDCV,
      &            A,LDA,ZERO,CHKAR,LDAR)
 
-      PRINT *, "POTRF2 NEW CHECKSUM OF A"
+*      PRINT *, "POTRF2 NEW CHECKSUM OF A"
       
-      DO I=1,2
-         PRINT 100,( CHKAR(I,J),J=1,N)
-      end do
+*      DO I=1,2
+*         PRINT 100,( CHKAR(I,J),J=1,N)
+*      end do
 
-      PRINT *, "POTRF2 OLD CHECKSUM OF A"
+*      PRINT *, "POTRF2 OLD CHECKSUM OF A"
 
-      DO I=1,2
-         PRINT 100, (CHKA(I,J),J=1,N)
-      END DO
+*      DO I=1,2
+*         PRINT 100, (CHKA(I,J),J=1,N)
+*      END DO
 
       CALL checkFT(A,LDA,N,N,N,CHKA,LDCA,CHKAR,LDAR)
          

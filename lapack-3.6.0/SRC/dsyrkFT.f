@@ -182,7 +182,7 @@
 *     ..
 *     .. Array Arguments ..
       DOUBLE PRECISION A(LDA,*),C(LDC,*),CHKA(LDCA,*),CHKC(LDCC,*)
-      DOUBLE PRECISION CHKAR(16,16),CHKCR(16,16),CHKV(2,16)
+      DOUBLE PRECISION CHKAR(2,64),CHKCR(2,64),CHKV(2,64)
 *     ..
       EXTERNAL DSYRK,DGEMM,checkFT
       
@@ -190,8 +190,8 @@
 *  =====================================================================
 *
 
-      LDAR=16
-      LDCR=16
+      LDAR=2
+      LDCR=2
       ZERO=0.0D+0
 
       CALL DGEMM('No transpose','No transpose',2,K,N,BETA,CHKV,LDCV,
@@ -200,28 +200,28 @@
       CALL DGEMM('No transpose','No transpose',2,N,N,BETA,CHKV,LDCV,
      &            C,LDC,ZERO,CHKCR,LDCR)
 
-      PRINT *, "SYRK NEW CHECKSUM OF A"
+*      PRINT *, "SYRK NEW CHECKSUM OF A"
       
-      DO I=1,2
-         Print 100,( CHKAR(I,J),J=1,K)
-      end do
+*      DO I=1,2
+*         Print 100,( CHKAR(I,J),J=1,K)
+*      end do
 
-      PRINT *, "SYRK OLD CHECKSUM OF A"
+*      PRINT *, "SYRK OLD CHECKSUM OF A"
 
-      DO I=1,2
-         PRINT 100, (CHKA(I,J),J=1,K)
-      END DO
+*      DO I=1,2
+*         PRINT 100, (CHKA(I,J),J=1,K)
+*      END DO
 
-      PRINT *, "SYRK NEW CHECKSUM OF C"
+*      PRINT *, "SYRK NEW CHECKSUM OF C"
       
-      DO I=1,2
-         PRINT 100, (CHKCR(I,J),J=1,N)
-      END DO
+*      DO I=1,2
+*         PRINT 100, (CHKCR(I,J),J=1,N)
+*      END DO
 
-      PRINT *, "SYRK OLD CHECKSUM OF C"
-      DO I=1,2
-         PRINT 100, (CHKC(I,J),J=1,N)
-      END DO
+*      PRINT *, "SYRK OLD CHECKSUM OF C"
+*      DO I=1,2
+*         PRINT 100, (CHKC(I,J),J=1,N)
+*      END DO
 
       CALL checkFT(A,LDA,N,N,K,CHKA,LDCA,CHKAR,LDAR)
       CALL checkFT(C,LDC,N,N,N,CHKC,LDCC,CHKCR,LDCR)

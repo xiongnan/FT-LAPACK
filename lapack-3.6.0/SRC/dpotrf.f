@@ -131,10 +131,10 @@
       INTEGER            I, J, JB, NB
 *     ..
 *     .. Checksums Related ..
-      INTEGER            NCHK, NM, LDV, LDM
-      PARAMETER          (NCHK=2, NM=16,LDV=2,LDM=16)
-      DOUBLE PRECISION   CHKV(NCHK, 4)
-      DOUBLE PRECISION   CHKM(NM, NM)
+      INTEGER            NN, NCHK, NM, LDV, LDM
+      PARAMETER          (NN = 1024, NCHK=2, NM=NN/64*2,LDV=2,LDM=NM)
+      DOUBLE PRECISION   CHKV(NCHK, 64)
+      DOUBLE PRECISION   CHKM(NM, NN)
 *     ..
 *     .. External Functions ..
       LOGICAL            LSAME
@@ -175,7 +175,7 @@
 *     Determine the block size for this environment.
 *
       NB = ILAENV( 1, 'DPOTRF', UPLO, N, -1, -1, -1 )
-      NB = 4
+*      NB = 4
       IF( NB.LE.1 .OR. NB.GE.N ) THEN
 *
 *        Use unblocked code.
@@ -189,16 +189,16 @@
 
 *         real, dimension (:,:), allocatable :: checksum_vector
 *         allocate ( checksum_vector(2, NB) )
-         DO I = 1, 4
+         DO I = 1, 64
             CHKV(1,I) = 1.0
             CHKV(2,I) = I;
          END DO
 
-         print *, "checksum vector:"
-         do I=1, 2
-            Print 123, ( CHKV(I,J), J=1,4 )
-         end do
- 123     format (1x, 16(1x,f5.1))
+*         print *, "checksum vector:"
+*         do I=1, 2
+*            Print 123, ( CHKV(I,J), J=1,4 )
+*         end do
+* 123     format (1x, 16(1x,f5.1))
          
 *
 *        Use blocked code.

@@ -1,6 +1,6 @@
       program hello
 
-      integer,parameter :: N = 16
+      integer,parameter :: N = 1024
       double precision :: upper (N, N)
       double precision :: lower (N, N)
       double precision :: matrix (N, N)
@@ -27,6 +27,8 @@
             upper(j, i) = temp   
          end do
       end do
+
+      IF (false) THEN
       Print *, "Lower:"
       do i=1, N
          Print 100, ( lower(i,j), j=1,N )
@@ -37,16 +39,17 @@
          Print 100, ( upper(i,j), j=1,N )
       end do
 
-      call DGEMM('N', 'N', N, N, N, one, lower, N, upper, N, zero,
-     +matrix, N)
 
       Print *, "Matrix"
       do i=1, N
          Print 100, ( matrix(i,j), j=1,N )
       end do
+      END IF
+            
+      call DGEMM('N', 'N', N, N, N, one, lower, N, upper, N, zero,
+     +matrix, N)
 
-
-      CALL DPOTRF('L', N, matrix, 16, info)
+      CALL DPOTRF('L', N, matrix, N, info)
 
 
 

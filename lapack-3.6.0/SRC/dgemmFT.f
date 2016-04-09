@@ -195,13 +195,14 @@
 *
 *     .. Scalar Arguments ..
       DOUBLE PRECISION ALPHA,BETA,ZERO
-      INTEGER K,LDA,LDB,LDC,M,N,LDCA,LDCB,LDCC,LDCV,LDAR,LDVR,LDCR
+      INTEGER K,LDA,LDB,LDC,M,N,LDCA,LDCB,LDCC,LDCV,LDAR,LDVR,LDCR,NN
+      PARAMETER NN=1024
       CHARACTER TRANSA,TRANSB
 *     ..
 *     .. Array Arguments ..
       DOUBLE PRECISION A(LDA,*),B(LDB,*),C(LDC,*),CHKA(LDCA,*)
-      DOUBLE PRECISION CHKB(LDCB,*),CHKC(LDCC,*),CHKV(2,16)
-      DOUBLE PRECISION CHKAR(16,16),CHKBR(16,16),CHKCR(16,16)
+      DOUBLE PRECISION CHKB(LDCB,*),CHKC(LDCC,*),CHKV(2,64)
+      DOUBLE PRECISION CHKAR((NN/N)*2,64),CHKBR(2,64),CHKCR((NN/N)*2,64)
 *     ..
       EXTERNAL DGEMM,checkFT
 
@@ -210,9 +211,9 @@
 *     .. Local Scalars ..
       INTEGER J
 
-      LDAR=16
-      LDBR=16
-      LDCR=16
+      LDAR=(NN/N)*2
+      LDBR=2
+      LDCR=(NN/N)*2
       ZERO=0.0D+0
      
 
@@ -229,35 +230,35 @@
      &              C(J,1),LDC,ZERO,CHKCR((J/N)*2+1,1),LDCR)
  20   CONTINUE   
 
-      PRINT *, "GEMM NEW CHECKSUM OF A"
-      DO I=1,(M/N)*2
-         PRINT 100, (CHKAR(I,J),J=1,K)
-      END DO
+*      PRINT *, "GEMM NEW CHECKSUM OF A"
+*      DO I=1,(M/N)*2
+*         PRINT 100, (CHKAR(I,J),J=1,K)
+*      END DO
 
-      PRINT *,"GEMM OLD CHECKSUM OF A"
-      DO I=1,(M/N)*2
-         PRINT 100, (CHKA(I,J),J=1,K)
-      END DO
+*      PRINT *,"GEMM OLD CHECKSUM OF A"
+*      DO I=1,(M/N)*2
+*         PRINT 100, (CHKA(I,J),J=1,K)
+*      END DO
 
-      PRINT *, "GEMM NEW CHECKSUM OF B"
-      DO I=1,2
-         PRINT 100, ( CHKBR(I,J),J=1,K)
-      END DO
+*      PRINT *, "GEMM NEW CHECKSUM OF B"
+*      DO I=1,2
+*         PRINT 100, ( CHKBR(I,J),J=1,K)
+*      END DO
 
-      PRINT *, "GEMM OLD CHECKSUM OF B"
-      DO I=1,2
-         PRINT 100, (CHKB(I,J), J=1,K)
-      END DO
+*      PRINT *, "GEMM OLD CHECKSUM OF B"
+*      DO I=1,2
+*         PRINT 100, (CHKB(I,J), J=1,K)
+*      END DO
 
-      PRINT *, "GEMM NEW CHECKSUM OF C"
-      DO I=1,(M/N)*2
-         PRINT 100, (CHKCR(I,J), J=1,N)
-      END DO
+*      PRINT *, "GEMM NEW CHECKSUM OF C"
+*      DO I=1,(M/N)*2
+*         PRINT 100, (CHKCR(I,J), J=1,N)
+*      END DO
 
-      PRINT *, "GEMM OLD CHECKSUM OF C"
-      DO I=1,(M/N)*2
-         PRINT 100, (CHKC(I,J), J=1,N)
-      END DO
+*      PRINT *, "GEMM OLD CHECKSUM OF C"
+*      DO I=1,(M/N)*2
+*         PRINT 100, (CHKC(I,J), J=1,N)
+*      END DO
 
       CALL checkFT(A,LDA,M,N,K,CHKA,LDCA,CHKAR,LDAR)
       CALL checkFT(B,LDB,N,N,K,CHKB,LDCB,CHKBR,LDBR)
